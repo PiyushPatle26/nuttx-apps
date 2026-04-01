@@ -42,7 +42,7 @@
 #include <nuttx/video/fb.h>
 #include <ctype.h>
 #include <spawn.h>
-#include <debug.h>
+#include <nuttx/debug.h>
 #include <poll.h>
 #include <nuttx/ascii.h>
 #include <nuttx/lib/builtin.h>

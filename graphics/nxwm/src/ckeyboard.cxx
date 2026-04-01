@@ -32,7 +32,7 @@
 #include <sched.h>
 #include <pthread.h>
 #include <assert.h>
-#include <debug.h>
+#include <nuttx/debug.h>
 #include <unistd.h>
 
 #include "graphics/nxwm/nxwmconfig.hxx"

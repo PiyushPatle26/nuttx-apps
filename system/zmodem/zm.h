@@ -36,7 +36,7 @@
 #include <sys/types.h>
 
 #include <stdint.h>
-#include <debug.h>
+#include <nuttx/debug.h>
 #include <syslog.h>
 
 #include <nuttx/compiler.h>
