@@ -294,7 +294,9 @@ void smp_call_test(void);
 
 /* spinlock.c ***************************************************************/
 
+#if defined(CONFIG_SPINLOCK) && defined(CONFIG_BUILD_FLAT)
 void spinlock_test(void);
+#endif
 
 /* perf_gettime.c ***********************************************************/
 

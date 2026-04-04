@@ -635,6 +635,12 @@ static int user_main(int argc, char *argv[])
       smp_call_test();
 #endif
 
+#if defined(CONFIG_SPINLOCK) && defined(CONFIG_BUILD_FLAT)
+      printf("\nuser_main: spinlock test\n");
+      spinlock_test();
+      check_test_memory_usage();
+#endif
+
 #if defined(CONFIG_SCHED_EVENTS) && defined(CONFIG_BUILD_FLAT)
       /* Verify nxevent */
 

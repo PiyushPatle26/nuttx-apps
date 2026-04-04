@@ -154,6 +154,12 @@ ifeq ($(CONFIG_SMP),y)
 CSRCS += smp_call.c
 endif
 
+ifeq ($(CONFIG_SPINLOCK),y)
+ifeq ($(CONFIG_BUILD_FLAT),y)
+CSRCS += spinlock.c
+endif
+endif
+
 ifeq ($(CONFIG_SCHED_EVENTS),y)
 ifeq ($(CONFIG_BUILD_FLAT),y)
 CSRCS += nxevent.c
@@ -165,7 +171,7 @@ CSRCS += perf_gettime.c
 endif
 
 ifeq ($(CONFIG_BUILD_FLAT),y)
-CSRCS += wdog.c spinlock.c
+CSRCS += wdog.c
 
 ifeq ($(CONFIG_HRTIMER),y)
 CSRCS += hrtimer.c
