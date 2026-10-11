@@ -1,0 +1,46 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+config TESTING_TLBSTALE
+	tristate "Stale TLB detection test"
+	default n
+	depends on SMP && MM_SHM
+	---help---
+		Check that unmapping a shared memory page on one CPU is seen by
+		another CPU running a thread of the same process.  A reader thread
+		pinned to CPU 1 keeps loading from a shared memory page while the
+		main thread, pinned to CPU 0, detaches and removes the segment.
+		Every load issued after shmdt() has returned must fault; a load
+		that succeeds means CPU 1 used a stale TLB entry.
+
+		Options:
+		  -l      control case: the reader shares CPU 0 with the main
+		          thread, so the local TLB invalidation covers it and it
+		          must fault.
+		  -c <n>  run the reader on CPU <n> instead of CPU 1.
+		  -x      cross-process reuse: writer processes, created before
+		          the free, allocate pages after it and fill them with a
+		          marker.  If the reader sees the marker through its stale
+		          entry, it read another process's data.  Most reliable as
+		          the first run after boot.
+
+if TESTING_TLBSTALE
+
+config TESTING_TLBSTALE_PROGNAME
+	string "Program name"
+	default "tlbstale"
+	---help---
+		This is the name of the program that will be used when the NSH ELF
+		program is installed.
+
+config TESTING_TLBSTALE_PRIORITY
+	int "Stale TLB test task priority"
+	default 100
+
+config TESTING_TLBSTALE_STACKSIZE
+	int "Stale TLB test stack size"
+	default DEFAULT_TASK_STACKSIZE
+
+endif
